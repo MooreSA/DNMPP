@@ -1,5 +1,3 @@
-
-
 services:
     web:
         image: nginx:latest
@@ -12,11 +10,34 @@ services:
             - code-network
     php:
         image: php:fpm
+        command:
+            - /bin/sh
+            - -c
+            - |
+                docker-php-ext-install mysqli 
+                echo "extension installed.....starting php-fpm........................................"
+                php-fpm
         volumes:
             - ./code:/code
             - ./php.ini:/usr/local/etc/php/conf.d/docker-php-ext-sodium.ini
         networks:
             - code-network
+    db:
+        image: mariadb:latest
+        environment: 
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - code-network
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: myapp_phpmyadmin
+        ports:
+            - 8081:80
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - code-network   
 
 networks:
     code-network:
