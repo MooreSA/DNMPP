@@ -1,4 +1,4 @@
-# Docker NGINX ~~MySQL~~ PHP ~~PHPMyAdmin~~ (DNMPP Stack)
+# Docker NGINX MySQL PHP PHPMyAdmin (DNMPP Stack)
 
 # Docker
 This NSCC Dev Env assumes you already have Docker installed AND `docker-compose`. Review the docker-compose.yml file to see which services are currently supported/integrated.
